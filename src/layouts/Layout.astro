@@ -1,0 +1,49 @@
+---                               
+import './src/styles/global.css' 
+import Toggledark from '../components/Toggledark.astro'
+import Nav from '../components/Nav.astro' 
+---   
+
+<html lang="fr" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <slot name="head" />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+        integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+        crossorigin="anonymous" referrerpolicy="no-referrer">
+	  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+  </head>
+  <body class="min-h-screen flex flex-col bg-gradient-custom text-gray-800 font-montserrat dark:text-gray-100">
+    <Nav class="fixed h-12 bottom-0 left-0 right-0 space-x-4 navMobile-gradient-custom bg-gradient-custom dark:text-gray-700 flex justify-around items-center md:hidden" textColor="text-gray-300 hover:text-gray-100 dark:text-gray-600 dark:hover:text-gray-800" toggleClass="hidden" aria-label="Navigation principale mobile" />
+    <!-- Header avec navigation -->
+    <header class="backdrop-blur-xl shadow-md dark:shadow-black">
+      <div class="container p-6 mx-auto flex flex-col justify-between items-center md:flex-row">
+        <h1 class="text-base flex-1">Davide De Notarpietro<span class="text-sm italic block mb-2">développeur web full-stack & eCommerçant</span></h1>
+        <Nav class="hidden md:flex md:gap-4 md:items-center flex-1" textColor="dark:hover:text-gray-100" toggleClass="md:flex" aria-label="Navigation principale" />
+        <Toggledark arial-label="gestion du thème" role="modification clair/sombre"/>
+      </div>
+      <slot name="header" />
+    </header>
+
+    <!-- Contenu principal -->
+    <slot name="main" />
+
+    <!-- Footer -->
+    <footer class="pb-13 bg-gray-200 dark:bg-gray-700 text-center p-4 text-sm">
+      <slot name="footer" />
+    </footer>
+
+    <!-- Charge AOS sans bloquer le parsing -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js" defer></script>
+	<!-- Initialise AOS après chargement complet -->
+    <script>
+      window.addEventListener('DOMContentLoaded', () => {
+        AOS.init();
+      });
+    </script>
+  </body>
+</html>

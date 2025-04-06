@@ -1,0 +1,16 @@
+---
+const { headData } = Astro.props;
+---
+
+{headData && (
+    <>
+        <title>{headData.title}</title>
+        <meta name="description" content={headData.description} />
+    </>
+)}
+
+
+
+	
+
+

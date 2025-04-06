@@ -1,0 +1,11 @@
+---
+import { Image } from 'astro:assets';
+import photoProfile from '../assets/images/photo_profil.jpg';
+const { title, description } = Astro.props;
+---
+
+<section id="about" class="mb-10" data-aos="fade-up">
+	<Image src={photoProfile} alt="photo de Davide De Notarpietro" class="rounded-full w-82 h-82 mb-4 mx-auto shadow-lg" loading="lazy" />
+	<h2 class="text-2xl font-semibold mb-2">{title}</h2>
+	<p>{description}</p>
+</section>
