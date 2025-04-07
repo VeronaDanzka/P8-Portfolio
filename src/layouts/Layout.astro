@@ -1,11 +1,22 @@
 ---                               
 import './src/styles/global.css' 
 import Toggledark from '../components/Toggledark.astro'
-import Nav from '../components/Nav.astro' 
+import Nav from '../components/Nav.astro'
+const year = new Date().getFullYear() 
 ---   
 
-<html lang="fr" class="dark">
+<html lang="fr" data-aos="fade-in">
   <head>
+    <script>
+      (function () {
+        const storedTheme = localStorage.getItem('theme portfolio davide');
+        const isDark = storedTheme === 'dark';
+        
+        if (isDark) {
+          document.documentElement.classList.add('dark');
+        }
+      })();
+    </script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <slot name="head" />
@@ -34,6 +45,7 @@ import Nav from '../components/Nav.astro'
 
     <!-- Footer -->
     <footer class="pb-13 bg-gray-200 dark:bg-gray-700 text-center p-4 text-sm">
+      <p slot="footer">© {year} Davide De Notarpietro - Tous droits réservés</p>
       <slot name="footer" />
     </footer>
 

@@ -3,5 +3,10 @@
         "id": "head",
         "title": "Portfolio développeur web & eCommerçant - Davide De Notarpietro",
         "description": "Je suis Davide De Notarpietro, un développeur web passionné par la création de sites internet et d'applications e-commerce."
+    },
+    {
+        "id": "profile",
+        "title": "Mon Parcours",
+        "description": "Voici un aperçu de mon parcours et de mes compétences."
     }
 ]

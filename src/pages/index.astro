@@ -2,16 +2,14 @@
 import BaseLayout from '../layouts/Layout.astro';
 import dataHome from '../data/home.json';
 import Head from '../components/Head.astro';
-import { Image } from 'astro:assets';
-import photoProfile from '../assets/images/photo_profil.jpg';
+import SectionProfile from '../components/SectionProfile.astro';
 const headData = dataHome.find((d) => d.id === "head");
-const year = new Date().getFullYear()
+const profileData = dataHome.find((d) => d.id === "profile");
 ---
 
 <BaseLayout>
 	<Head slot="head" headData={headData} />
 	<main slot="main" class="flex-grow p-6 container mx-auto">
-
+		<SectionProfile title={profileData.title} description={profileData.description} />
 	</main>
-	<p slot="footer">© {year} Davide De Notarpietro - Tous droits réservés</p>
 </BaseLayout>
