@@ -1,11 +1,9 @@
 ---
-import { Image } from 'astro:assets';
-import photoProfile from '../../assets/images/photo_profil.webp';
 const { title, description } = Astro.props;
 ---
 
-<section id="about" class="mb-10" data-aos="fade-up">
-	<Image src={photoProfile} alt="photo de Davide De Notarpietro" class="rounded-full w-52 h-52 mb-4 mx-auto shadow-lg" />
+<section id="about" class="mb-10" data-aos="fade-up" data-aos-delay="300">
+	<img src="https://res.cloudinary.com/dhrdnx5g7/image/upload/v1744073809/chy9oy90ric6b1w9ckiy.webp" width="500" height="500" alt="photo de Davide De Notarpietro" class="rounded-full w-52 h-52 mb-4 mx-auto shadow-lg" decoding="async" />
 	<h2 class="text-2xl font-semibold mb-2">{title}</h2>
 	<p>{description}</p>
 </section>
