@@ -5,7 +5,6 @@ const Project = defineTable({
     id: column.number({ primaryKey: true }),
     title: column.text(),
     description: column.text(),
-    image: column.text(),
     created_at: column.date(),
   },
 });

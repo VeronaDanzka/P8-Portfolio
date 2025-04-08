@@ -1,8 +1,0 @@
----
-const { class: className = '', textColor = ''} = Astro.props;
----
-<nav class={className} aria-label="Navigation principale">
-    <a href="#about" class={`text-xs hover:scale-105 ${textColor} flex flex-col md:flex-row md:text-sm md:gap-1`}><i class="fa-regular fa-id-card text-center text-xl"></i>À propos</a>
-    <a href="/projects" class={`text-xs hover:scale-105 ${textColor} flex flex-col md:flex-row md:text-sm md:gap-1`}><i class="fa-regular fa-pen-to-square text-center text-xl"></i>Projets</a>
-    <a href="#contact" class={`text-xs hover:scale-105 ${textColor} flex flex-col md:flex-row md:text-sm md:gap-1`}><i class="fa-regular fa-envelope text-center text-xl"></i>Contact</a>
-</nav>

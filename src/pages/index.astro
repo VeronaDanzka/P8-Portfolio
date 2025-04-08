@@ -1,8 +1,8 @@
 ---
 import BaseLayout from '../layouts/Layout.astro';
 import dataHome from '../data/home.json';
-import Head from '../components/Head.astro';
-import SectionProfile from '../components/SectionProfile.astro';
+import Head from '../components/astro/Head.astro';
+import SectionProfile from '../components/astro/SectionProfile.astro';
 const headData = dataHome.find((d) => d.id === "head");
 const profileData = dataHome.find((d) => d.id === "profile");
 ---

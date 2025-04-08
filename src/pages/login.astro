@@ -1,0 +1,18 @@
+---
+import LoginForm from '../components/react/LoginForm.jsx'
+import './src/styles/global.css'
+import Toggledark from '../components/astro/Toggledark.astro'
+---
+
+<html lang="fr">
+  <head>
+    <title>Connexion Admin</title>
+  </head>
+  <body class="font-montserrat bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-gray-100">
+    <Toggledark slot="header"/>
+    <main class="text-center">
+      <LoginForm client:visible />
+      <a href="/" class="text-sm text-gray-600 dark:text-gray-400 hover:underline">retourner sur la page d'accueil</a>
+    </main>
+  </body>
+</html>

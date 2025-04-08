@@ -12,7 +12,6 @@ const projects = await db.select().from(Project);
         <ul class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {projects.map((p) => (
             <li class="border p-4 rounded shadow">
-            <img src={p.image} alt={p.title} class="mb-2 rounded" />
             <h2 class="text-xl font-semibold">{p.title}</h2>
             <p class="text-sm text-gray-600">{p.description}</p>
             </li>
