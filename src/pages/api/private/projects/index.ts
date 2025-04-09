@@ -1,9 +1,44 @@
 import type { APIRoute } from 'astro';
 import { v2 as cloudinary } from 'cloudinary';
 import sanitizeHtml from 'sanitize-html';
-import { db, Project, Image } from 'astro:db';
+import { db, Project, Image, sql } from 'astro:db';
 
 export const prerender = false;
+
+export const GET: APIRoute = async () => {
+  try {
+    // On récupère tous les projets
+    const projects = await db.select().from(Project);
+
+    // Pour chaque projet, on récupère l'image associée (une seule) → juste l'URL
+    const projectsWithImageUrl = await Promise.all(
+      projects.map(async (project) => {
+        const [image] = await db
+          .select()
+          .from(Image)
+          .where(sql`projectId = ${project.id}`);
+
+        return {
+          ...project,
+          imageUrl: image?.url ?? null,
+        };
+      })
+    );
+
+    return new Response(JSON.stringify(projectsWithImageUrl), {
+      status: 200,
+      headers: { 'Content-Type': 'application/json' },
+    });
+
+  } catch (err) {
+    console.error('Erreur GET /projects', err);
+    return new Response(JSON.stringify({ error: 'Erreur lors de la récupération des projets.' }), {
+      status: 500,
+      headers: { 'Content-Type': 'application/json' },
+    });
+  }
+};
+
 
 cloudinary.config({
   cloud_name: import.meta.env.CLOUDINARY_CLOUD_NAME,
@@ -12,6 +47,7 @@ cloudinary.config({
 });
 
 export const POST: APIRoute = async ({ request }) => {
+  let public_id = '';
   try {
     const formData = await request.formData();
 
@@ -25,7 +61,7 @@ export const POST: APIRoute = async ({ request }) => {
     const file = formData.get('file') as File | null;
 
     // Vérifications des champs obligatoires
-    if (!title || !subtitle || !description || !tags || !file || !github || !website) {
+    if (!title || !subtitle || !description || !tags || !file) {
       return new Response(JSON.stringify({ error: 'Tous les champs obligatoires doivent être remplis.' }), {
         status: 400,
         headers: { 'Content-Type': 'application/json' },
@@ -37,7 +73,20 @@ export const POST: APIRoute = async ({ request }) => {
     const buffer = Buffer.from(arrayBuffer);
 
     const uploadResult: any = await new Promise((resolve, reject) => {
-      cloudinary.uploader.upload_stream({ folder: 'projects' }, (err, result) => {
+      cloudinary.uploader.upload_stream(
+        { 
+          folder: 'projects', 
+          format: 'webp', 
+          quality: 'auto:eco',
+          transformation: [
+            {
+              width: 500,
+              height: 500,
+              crop: 'fill',        // Remplit exactement le cadre 500x500 en centrant
+              gravity: 'auto',     
+            },
+          ], 
+        }, (err, result) => {
         if (err) return reject(err);
         resolve(result);
       }).end(buffer);
@@ -49,16 +98,17 @@ export const POST: APIRoute = async ({ request }) => {
       title,
       subtitle,
       description,
-      github,
-      website,
       tags,
       created_at: new Date(),
+      ...(github && { github }),
+      ...(website && { website }),
       // Tu peux ajouter des colonnes comme : imageUrl: uploadResult.secure_url
     });
+    public_id = uploadResult.public_id; // Récupération du public_id pour la suppression éventuelle
     await db.insert(Image).values({
       projectId: id,
       url: uploadResult.secure_url,
-      public_id: uploadResult.public_id,
+      public_id: public_id,
       created_at: new Date(),
     });
     return new Response(JSON.stringify({ success: true, result: uploadResult }), {
@@ -68,6 +118,7 @@ export const POST: APIRoute = async ({ request }) => {
 
   } catch (err) {
     console.error(err);
+    await cloudinary.uploader.destroy(public_id);
     return new Response(JSON.stringify({ error: 'Erreur lors de l\'upload' }), {
       status: 500,
       headers: { 'Content-Type': 'application/json' },
