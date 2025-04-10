@@ -6,7 +6,7 @@ const LoginButton = () => {
         const hasToken = document.cookie.includes('visibleTokenLoggedIn=true');
         setIsLoggedIn(hasToken);  
     }, []);    
-    const textColor = !isLoggedIn ? 'text-gray-500' : 'text-blue-500';
+    const textColor = !isLoggedIn ? 'text-gray-600 dark:text-gray-400' : 'text-white';
     const bgColor = !isLoggedIn ? 'bg-none hover:underline' : 'bg-blue-500 hover:bg-blue-600 dark:hover:bg-blue-700';
     const link = !isLoggedIn ? '/login' : '/admin1603';
     let title =  '';
@@ -15,7 +15,7 @@ const LoginButton = () => {
     }
     return (
         <a href={link} className={textColor}>
-            <button className={`px-2 py-1 ${bgColor} text-white rounded transition-colors duration-200 cursor-pointer`}>
+            <button className={`px-2 py-1 ${bgColor} rounded transition-colors duration-200 cursor-pointer`}>
                 {title}
             </button>
         </a>

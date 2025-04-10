@@ -1,0 +1,83 @@
+---
+import BaseLayout from '../../layouts/Layout.astro';
+import { db, Project, Image, sql } from 'astro:db';
+
+export const prerender = false;
+const { params } = Astro;
+const id = params.id;
+// On récupère tous les projets
+const project = await db
+  .select()
+  .from(Project)
+  .where(sql`id = ${Number(id)}`)
+  .get(); // ⬅️ récupère un seul résultat
+
+// On récupère l'image associée (une seule) → juste l'URL
+const [image] = await db
+  .select()
+  .from(Image)
+  .where(sql`projectId = ${project.id}`);
+const formatted = {
+  ...project,
+  imageUrl: image?.url ?? null,
+  tagList: project.tags?.split(',').map(t => t.trim()) || []
+};
+---
+<BaseLayout>
+    <main slot="main" class="flex-grow px-4 py-10 container mx-auto">
+        <div class="max-w-3xl mx-auto bg-white dark:bg-gray-900 rounded-xl shadow-lg p-8 space-y-10">
+      
+          <h2 class="text-4xl text-center font-extrabold text-gray-800 dark:text-white">
+            {formatted.title}
+          </h2>
+      
+          <!-- Le Projet -->
+          <section class="text-center">
+            <h3 class="text-2xl font-bold mb-4 text-gray-700 dark:text-gray-200">
+              Le Projet
+            </h3>
+            <div class="prose prose-gray dark:prose-invert max-w-none text-left" set:html={formatted.description}></div>
+          </section>
+      
+          <!-- Technologies -->
+          <section>
+            <h3 class="text-2xl font-bold mb-4 text-gray-700 dark:text-gray-200 text-center">
+              Technologies & Compétences
+            </h3>
+            <div class="flex flex-wrap justify-center gap-3">
+              {formatted.tagList.map((tag) => (
+                <span class="bg-blue-600 text-white text-xs px-3 py-1 rounded-full shadow">
+                  {tag}
+                </span>
+              ))}
+            </div>
+          </section>
+      
+          <!-- Liens -->
+          <section>
+            <h3 class="text-2xl font-bold mb-4 text-gray-700 dark:text-gray-200 text-center">
+              Liens
+            </h3>
+            <ul class="flex flex-col items-center gap-2">
+              {formatted.website && (
+                <li>
+                  <a href={formatted.website} target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline text-sm">
+                    Site Web ↗
+                  </a>
+                </li>
+              )}
+              {formatted.github && (
+                <li>
+                  <a href={formatted.github} target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline text-sm">
+                    Code GitHub ↗
+                  </a>
+                </li>
+              )}
+            </ul>
+          </section>
+      
+        </div>
+    </main>
+      
+      
+</BaseLayout>

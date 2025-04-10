@@ -80,7 +80,7 @@ export const POST: APIRoute = async ({ request }) => {
           quality: 'auto:eco',
           transformation: [
             {
-              width: 500,
+              width: 364,
               height: 500,
               crop: 'fill',        // Remplit exactement le cadre 500x500 en centrant
               gravity: 'auto',     

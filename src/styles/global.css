@@ -4,6 +4,30 @@
     --font-sans: 'Inter', 'sans-serif';
     --font-montserrat: 'Montserrat', 'ui-sans-serif', 'system-ui';
 }
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+.animate-fadeIn {
+    animation: fadeIn 0.2s ease-out;
+}
+@keyframes slide {
+    0% {
+      transform: translateX(100%);
+    }
+    100% {
+      transform: translateX(-100%);
+    }
+}
+
+.animate-slide {
+animation: slide 15s linear infinite;
+}
+.mask-fade {
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%);
+    mask-image: linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%);
+}
 nav.bg-gradient-custom {
     background: -webkit-linear-gradient(90deg, #000000,#0d1521,#070e18);
     background: linear-gradient(90deg, #000000,#0d1521,#070e18);

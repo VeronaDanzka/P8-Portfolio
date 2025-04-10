@@ -9,7 +9,7 @@ export const POST: APIRoute = async ({ request }) => {
   const { username, password } = await request.json();
 
   // Auth de test
-  if (username === 'davide' && password === 'test123') {
+  if (username === import.meta.env.USER && password === import.meta.env.PASSWORD) {
     const token = jwt.sign({ username }, SECRET, {
       expiresIn: '24h',
     });

@@ -1,9 +1,42 @@
----
-const { title, description } = Astro.props;
----
-
-<section id="about" class="mb-10" data-aos="fade-up" data-aos-delay="300">
-	<img src="https://res.cloudinary.com/dhrdnx5g7/image/upload/v1744073809/chy9oy90ric6b1w9ckiy.webp" width="500" height="500" alt="photo de Davide De Notarpietro" class="rounded-full w-52 h-52 mb-4 mx-auto shadow-lg" decoding="async" />
-	<h2 class="text-2xl font-semibold mb-2">{title}</h2>
-	<p>{description}</p>
+<section id="about" class="px-4 py-15" data-aos="fade-up" data-aos-delay="300">
+	<div class="max-w-3xl mx-auto bg-white dark:bg-gray-900 rounded-xl shadow-lg p-20 space-y-6 text-center">
+	  
+	  <figure>
+		<img 
+		  src="https://res.cloudinary.com/dhrdnx5g7/image/upload/v1744073809/chy9oy90ric6b1w9ckiy.webp"
+		  width="500" height="500" alt="photo de Davide De Notarpietro"
+		  class="rounded-full w-40 h-40 mx-auto mb-4 shadow-lg object-cover"
+		  decoding="async"
+		/>
+		<figcaption class="text-gray-700 dark:text-gray-300 text-sm md:text-base">
+		  Davide - Développeur web & eCommerçant
+		</figcaption>
+	  </figure>
+  
+	  <h2 class="text-3xl font-bold text-gray-800 dark:text-white mb-4">
+		Mon Parcours
+	  </h2>
+  
+	  <div class="space-y-4 text-gray-700 dark:text-gray-300 text-sm leading-relaxed text-justify">
+		<p>
+		  Passionné par le <strong>commerce en ligne</strong> depuis 2016, j'ai créé plusieurs <strong>boutiques e-commerce,</strong> sur les places de marchés, spécialisées dans l’achat-revente de produits italiens de qualité. Cette première expérience m’a permis de me familiariser avec les enjeux du <strong>sourcing</strong>, de la <strong>gestion de stock</strong> et de l’<strong>expérience utilisateur</strong>.
+		</p>
+  
+		<p>
+		  Curieux et autodidacte, j’ai rapidement ressenti le besoin de maîtriser la partie technique des sites web pour aller plus loin. J’ai donc suivi la formation <strong>Développeur Web</strong> chez <strong>OpenClassrooms</strong>, qui m’a permis de construire de solides compétences en <strong>Frontend</strong> et en <strong>Backend</strong>.
+		</p>
+  
+		<p>
+		  Aujourd’hui, je crée des <strong>sites web sur-mesure</strong>, performants et adaptés aux besoins de mes clients. J’utilise des technologies modernes comme <strong>Astro</strong>, <strong>React</strong>, <strong>Node.js</strong> et <strong>Express</strong>. Je travaille aussi bien sur des sites "from scratch" (entièrement codés à partir de zéro) qu'avec des <strong>CMS</strong> comme <strong>WordPress</strong> ou <strong>Prestashop</strong>.
+		</p>
+  
+		<p>
+		  Grâce à mon expérience d’<strong>entrepreneur e-commerce</strong>, je propose un accompagnement complet allant du développement technique jusqu’à la stratégie digitale. J’aide mes clients à construire un site efficace mais aussi à optimiser leur <strong>présence en ligne</strong> et leur <strong>performance commerciale</strong>.
+		</p>
+  
+		<p>
+		  Aujourd’hui, à travers <strong>Guarini Tech</strong>, je mets mon savoir-faire au service des entreprises et des porteurs de projets souhaitant développer un <strong>business solide</strong> et pérenne sur le web.
+		</p>
+	  </div>
+	</div>
 </section>

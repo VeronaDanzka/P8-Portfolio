@@ -1,15 +1,16 @@
 ---
 import BaseLayout from '../layouts/Layout.astro';
-import dataHome from '../data/home.json';
-import Head from '../components/astro/Head.astro';
 import SectionProfile from '../components/astro/SectionProfile.astro';
-const headData = dataHome.find((d) => d.id === "head");
-const profileData = dataHome.find((d) => d.id === "profile");
+import SlideProjects from '../components/react/SlideProjects';
+import SectionContact from '../components/astro/SectionContact.astro';
 ---
 
 <BaseLayout>
-	<Head slot="head" headData={headData} />
 	<main slot="main" class="flex-grow p-6 container mx-auto">
-		<SectionProfile title={profileData.title} description={profileData.description} />
+		<SectionProfile />
+		<div class="h-150 w-full mask-fade bg-white dark:bg-gray-900 rounded-xl shadow-lg">
+			<SlideProjects client:visible/>
+		</div>
+		<SectionContact />
 	</main>
 </BaseLayout>

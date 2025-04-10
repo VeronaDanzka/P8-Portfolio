@@ -6,7 +6,7 @@ import LoginButton from '../components/react/LoginButton.jsx'
 const year = new Date().getFullYear() 
 ---   
 
-<html lang="fr" data-aos="fade-in">
+<html lang="fr">
   <head>
     <script>
       (function () {
@@ -21,6 +21,9 @@ const year = new Date().getFullYear()
     </script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	  <meta name="robots" content="index, follow">
+	  <meta name="author" content="Davide De Notarpietro">
     <slot name="head" />
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -31,7 +34,8 @@ const year = new Date().getFullYear()
 	  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
   </head>
   <body class="min-h-screen flex flex-col bg-gradient-custom text-gray-800 font-montserrat dark:text-gray-300">
-    <Nav class="fixed h-12 bottom-0 left-0 right-0 space-x-4 navMobile-gradient-custom bg-gradient-custom dark:text-gray-700 flex justify-around items-center md:hidden" textColor="text-gray-300 hover:text-gray-100 dark:text-gray-600 dark:hover:text-gray-800" toggleClass="hidden" aria-label="Navigation principale mobile" />
+    <Nav class="z-9999 fixed h-12 bottom-0 left-0 right-0 space-x-4 navMobile-gradient-custom bg-gradient-custom dark:text-gray-700 flex justify-around items-center md:hidden" textColor="text-gray-300 hover:text-gray-100 dark:text-gray-600 dark:hover:text-gray-800" toggleClass="hidden" aria-label="Navigation principale mobile" />
+    <div class="flex-grow" data-aos="fade-in">
     <!-- Header avec navigation -->
     <header class="backdrop-blur-xl shadow-md dark:shadow-black md:h-32">
       <div class="container p-6 mx-auto flex flex-col justify-between items-center md:flex-row md:h-32">
@@ -47,9 +51,11 @@ const year = new Date().getFullYear()
 
     <!-- Contenu principal -->
     <slot name="main" />
-
+    </div>
     <!-- Footer -->
-    <footer class="pb-13 bg-gray-200 dark:bg-gray-700 text-center p-4 text-sm">
+    <footer class="pb-13 flex flex-col gap-4 bg-gray-200 dark:bg-gray-700 text-center p-4 text-sm">
+      <p>Site réalisé à la main et ne collectant aucunes données personnelles</p>
+      <p>Développé avec <a href="https://astro.build/" target="_blank" rel="noopener noreferrer" class="text-blue-600 dark:text-blue-400 hover:underline">Astro</a> et déployé sur <a href="https://vercel.com/" target="_blank" rel="noopener noreferrer" class="text-blue-600 dark:text-blue-400 hover:underline">Vercel</a></p>
       <p slot="footer">© {year} Davide De Notarpietro - Tous droits réservés</p>
       <slot name="footer" />
     </footer>

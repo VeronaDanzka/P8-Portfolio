@@ -21,7 +21,14 @@ const Image = defineTable({
     created_at: column.date()
   },
 });
+const SelectProject = defineTable({
+  columns: {
+    id: column.number({ primaryKey: true, autoIncrement: true, notNull: true }),
+    projectId: column.number({ references: () => Project.columns.id }), // clé étrangère
+    checked: column.boolean(),
+  },
+});
 // https://astro.build/db/config
 export default defineDb({
-  tables: { Project, Image }
+  tables: { Project, Image, SelectProject }
 });

@@ -1,0 +1,76 @@
+---
+import BaseLayout from '../../layouts/Layout.astro';
+import sanitizeHtml from 'sanitize-html';
+import { db, Project, Image, sql } from 'astro:db';
+
+export const prerender = false;
+
+    // On récupère tous les projets
+    const projects = await db.select().from(Project);
+
+    // Pour chaque projet, on récupère l'image associée (une seule) → juste l'URL
+    const projectsWithImageUrl = await Promise.all(
+      projects.map(async (project) => {
+        const [image] = await db
+          .select()
+          .from(Image)
+          .where(sql`projectId = ${project.id}`);
+        const tags = project.tags?.split(',').map((tag) => tag.trim()) || [];
+        return {
+          ...project,
+          imageUrl: image?.url ?? null,
+          tagList: tags,
+        };
+      })
+    );
+    
+
+---
+<BaseLayout>
+    <main slot="main" class="flex-grow p-6 container mx-auto">
+        <h1 class="text-3xl font-bold mb-4">Mes projets</h1>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 auto-rows-fr">
+            {projectsWithImageUrl.map((p) => (
+                <a href={`/projects/${p.id}`} class="group block cursor-pointer">
+                    <article class="bg-gray-200 h-full overflow-hidden dark:bg-gray-900 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 items-center text-center hover:scale-[1.015] transition-transform duration-500 ease-in-out">
+
+                        <div class="relative overflow-hidden">                       
+                            {p.imageUrl && (
+                                <div class="relative left-1/2 transform -translate-x-1/2 translate-y-25 w-60 h-60 rounded-lg overflow-hidden shadow-lg dark:shadow-black z-10 transition-transform duration-500 ease-in-out group-hover:translate-y-10">
+                                    <img
+                                    src={p.imageUrl}
+                                    alt={p.title}
+                                    class="w-full h-full object-cover object-bottom"
+                                    />
+                                </div>
+                            )}
+                        </div>
+                        <div class="p-4 border-box flex gap-4 justify-between bg-white dark:bg-gray-700 relative z-50">
+                            <div class="flex flex-col justify-center items-start text-start">
+                                <h3 class="text-xl font-semibold text-gray-800 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-600 transition-colors">
+                                    {p.title}
+                                </h3>
+                                <p class="text-sm text-gray-500 dark:text-gray-300">
+                                    {p.subtitle}
+                                </p>
+                            </div>
+                            <span class="mt-4 text-sm text-gray-400 dark:text-gray-300">
+                                Voir plus →
+                            </span>
+                        </div>                       
+                        {p.tagList.length > 0 && (
+                                <div class="flex flex-wrap gap-2 mt-2 p-2">
+                                {p.tagList.map((tag) => (
+                                    <p class="px-2 py-1 text-xs font-medium bg-blue-600 dark:bg-blue-900 text-gray-100 dark:text-white rounded">
+                                        {tag}
+                                    </p>
+                                ))}
+                                </div>
+                        )}
+                    </article>
+                </a>
+
+            ))}
+        </div>
+    </main>
+</BaseLayout>

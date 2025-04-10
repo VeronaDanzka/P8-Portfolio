@@ -42,7 +42,9 @@ const ProjectForm = ({ modify = false, projects, setView }) => {
         if (fileInputRef.current) {
           fileInputRef.current.value = null;
         }
-        setView('mosaique');
+        if (modify) {
+          setView('mosaique');
+        }
       }
 
     } catch (err) {
