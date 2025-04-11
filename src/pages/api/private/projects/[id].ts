@@ -1,5 +1,5 @@
 import type { APIRoute } from 'astro';
-import { db, Project, Image, sql } from 'astro:db';
+import { db, Project, Image, SelectProject, sql } from 'astro:db';
 import sanitizeHtml from 'sanitize-html';
 import { v2 as cloudinary } from 'cloudinary';
 
@@ -11,7 +11,7 @@ cloudinary.config({
 
 export const prerender = false;
 
-/** 🔥 Supprimer un projet (et son image Cloudinary) */
+// Supprimer un projet (et son image Cloudinary) 
 export const DELETE: APIRoute = async ({ params }) => {
   const id = Number(params.id);
   if (!id) return new Response('ID manquant ou invalide', { status: 400 });
@@ -26,6 +26,7 @@ export const DELETE: APIRoute = async ({ params }) => {
       await cloudinary.uploader.destroy(image.public_id);
     }
 
+    await db.delete(SelectProject).where(sql`projectId = ${id}`);
     await db.delete(Image).where(sql`projectId = ${id}`);
     await db.delete(Project).where(sql`id = ${id}`);
 
@@ -43,7 +44,7 @@ cloudinary.config({
 });
 
 
-/** ✏️ Mettre à jour un projet */
+// Mettre à jour un projet
 export const PUT: APIRoute = async ({ request, params }) => {
   const id = Number(params.id);
   if (!id) return new Response('ID manquant ou invalide', { status: 400 });
@@ -66,7 +67,7 @@ export const PUT: APIRoute = async ({ request, params }) => {
       });
     }
 
-    // 🔁 Si un nouveau fichier est fourni, on supprime l'ancien et on upload le nouveau
+    // Si un nouveau fichier est fourni, on supprime l'ancien et on upload le nouveau
     if (file && file.size > 0) {
       // Récupération de l'ancienne image
       const [oldImage] = await db
@@ -127,7 +128,6 @@ export const PUT: APIRoute = async ({ request, params }) => {
     return new Response(JSON.stringify({ success: true }), { status: 200 });
 
   } catch (err) {
-    console.error('❌ Erreur PUT /projects/[id]', err);
     return new Response(JSON.stringify({ error: 'Erreur serveur' }), { status: 500 });
   }
 };

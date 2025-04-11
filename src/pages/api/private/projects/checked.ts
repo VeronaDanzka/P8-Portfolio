@@ -25,13 +25,13 @@ export const POST: APIRoute = async ({ request }) => {
           .where(sql`projectId = ${projectId}`);
 
         if (existing) {
-          // Si la ligne existe déjà → update
+          // Si la ligne existe déjà: update
           await db
             .update(SelectProject)
             .set({ checked: true })
             .where(sql`projectId = ${projectId}`);
         } else {
-          // Sinon → insert
+          // Sinon: insert
           await db.insert(SelectProject).values({ projectId, checked: true });
         }
       })
@@ -39,7 +39,6 @@ export const POST: APIRoute = async ({ request }) => {
 
     return new Response(JSON.stringify({ success: true }), { status: 200 });
   } catch (err) {
-    console.error("Erreur API api/private/projects/checked:", err);
     return new Response(JSON.stringify({ error: "Erreur serveur" }), { status: 500 });
   }
 }

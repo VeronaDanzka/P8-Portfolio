@@ -82,7 +82,7 @@ export const POST: APIRoute = async ({ request }) => {
             {
               width: 364,
               height: 500,
-              crop: 'fill',        // Remplit exactement le cadre 500x500 en centrant
+              crop: 'fit',        // fit le cadre 364x500
               gravity: 'auto',     
             },
           ], 
