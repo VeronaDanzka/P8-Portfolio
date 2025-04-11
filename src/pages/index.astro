@@ -3,6 +3,7 @@ import BaseLayout from '../layouts/Layout.astro';
 import SectionProfile from '../components/astro/SectionProfile.astro';
 import SlideProjects from '../components/react/SlideProjects';
 import SectionContact from '../components/astro/SectionContact.astro';
+import SectionCompetences from '../components/astro/SectionCompetences.astro';
 ---
 
 <BaseLayout>
@@ -11,6 +12,7 @@ import SectionContact from '../components/astro/SectionContact.astro';
 	<meta slot="head" name="description" content="Je suis Davide De Notarpietro, développeur web full-stack et eCommerçant. N'hésitez pas à me contacter pour discuter de votre projet" />
 	<main slot="main" class="flex-grow p-6 container mx-auto">
 		<SectionProfile />
+		<SectionCompetences />
 		<div class="h-150 w-full mask-fade bg-white dark:bg-gray-900 rounded-xl shadow-lg">
 			<SlideProjects client:idle />
 		</div>

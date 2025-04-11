@@ -22,7 +22,7 @@ const SlideProjects = () => {
         fetchProjects();
     }, []);
     return (
-      <div className="overflow-hidden w-full">
+      <div data-aos="fade-left" className="overflow-hidden w-full">
         <h2 className="text-3xl mt-5 font-bold text-center mb-6">Mes projets récents</h2>
         <div className="flex w-full animate-slide gap-6">
           {projects.map((p) => (
@@ -48,11 +48,11 @@ const SlideProjects = () => {
                     <h3 className="text-xl font-semibold text-gray-800 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-600 transition-colors">
                       {p.title}
                     </h3>
-                    <p className="text-sm text-gray-500 dark:text-gray-300">
+                    <p className="text-sm text-gray-600 dark:text-gray-200">
                       {p.subtitle}
                     </p>
                   </div>
-                  <span className="mt-4 text-sm text-gray-400 dark:text-gray-300">
+                  <span className="mt-4 text-sm text-gray-600 dark:text-gray-200">
                     Voir plus →
                   </span>
                 </div>
