@@ -42,7 +42,7 @@ const year = new Date().getFullYear()
         <h1 class="text-base font-bold flex-1">Davide De Notarpietro<span class="text-sm font-normal italic block mb-2">développeur web full-stack & eCommerçant</span></h1>
         <Nav class="hidden md:flex md:gap-4 md:items-center md:justify-center flex-2" textColor="dark:hover:text-gray-100" toggleClass="md:flex" aria-label="Navigation principale" />
         <div class="flex flex-1 flex-col-reverse items-center gap-2 md:w-35">
-          <LoginButton client:visible />
+          <LoginButton client:load />
           <Toggledark arial-label="gestion du thème" role="modification clair/sombre"/>
         </div>
       </div>
