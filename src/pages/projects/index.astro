@@ -27,6 +27,9 @@ export const prerender = false;
 
 ---
 <BaseLayout>
+    <meta slot="head" name="robots" content="index, follow">
+    <title slot="head">Portfolio de Davide De Notarpietro - Développeur Web Full-Stack - Mes Projets</title>
+	<meta slot="head" name="description" content="Voici la liste de mes projets de développeur web full-stack et eCommerçant. N'hésitez pas à me contacter pour discuter de votre projet" />
     <main slot="main" class="flex-grow p-6 container mx-auto">
         <h1 class="text-3xl font-bold mb-4">Mes projets</h1>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 auto-rows-fr">

@@ -10,9 +10,9 @@ const project = await db
   .select()
   .from(Project)
   .where(sql`id = ${Number(id)}`)
-  .get(); // ⬅️ récupère un seul résultat
+  .get(); // récupère un seul résultat
 
-// On récupère l'image associée (une seule) → juste l'URL
+// On récupère l'url de l'image associée
 const [image] = await db
   .select()
   .from(Image)
@@ -24,6 +24,9 @@ const formatted = {
 };
 ---
 <BaseLayout>
+    <meta name="robots" content="index, follow">
+    <title slot="head">Portfolio de Davide De Notarpietro - Projet {formatted.title}</title>
+    <meta slot="head" name="description" content={`Je vous présente mon Projet ${formatted.title}, ${formatted.subtitle}. N'hésitez pas à me contacter pour discuter de votre projet`} />
     <main slot="main" class="flex-grow px-4 py-10 container mx-auto">
         <div class="max-w-3xl mx-auto bg-white dark:bg-gray-900 rounded-xl shadow-lg p-8 space-y-10">
       
