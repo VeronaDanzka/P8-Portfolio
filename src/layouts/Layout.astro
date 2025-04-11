@@ -8,6 +8,9 @@ const year = new Date().getFullYear()
 
 <html lang="fr">
   <head>
+    <link rel="preload" href="/fonts/montserrat-v29-latin-regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+    <link rel="preload" href="/fonts/montserrat-v29-latin-italic.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+    <link rel="preload" href="/fonts/montserrat-v29-latin-700.woff2" as="font" type="font/woff2" crossorigin="anonymous">
     <script>
       (function () {
         const storedTheme = localStorage.getItem('theme portfolio davide');
@@ -19,6 +22,7 @@ const year = new Date().getFullYear()
         }
       })();
     </script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js" defer></script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -26,19 +30,6 @@ const year = new Date().getFullYear()
 	  <meta name="author" content="Davide De Notarpietro">
     <slot name="head" />
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
-    <!-- Préconnect pour éviter la latence DNS -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-    <!-- Preload pour dire au navigateur "charge ça en priorité" -->
-    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap">
-
-    <!-- Chargement optimisé non bloquant -->
-    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
-    <!-- Fallback is js désactivé -->
-    <noscript>
-      <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-    </noscript>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
         integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
         crossorigin="anonymous" referrerpolicy="no-referrer">
@@ -68,10 +59,7 @@ const year = new Date().getFullYear()
       <p>Développé avec <a href="https://astro.build/" target="_blank" rel="noopener noreferrer" class="text-blue-600 dark:text-blue-400 hover:underline">Astro</a> et déployé sur <a href="https://vercel.com/" target="_blank" rel="noopener noreferrer" class="text-blue-600 dark:text-blue-400 hover:underline">Vercel</a></p>
       <p slot="footer">© {year} Davide De Notarpietro - Tous droits réservés</p>
       <slot name="footer" />
-    </footer>
-
-    <!-- Charge AOS sans bloquer le parsing -->
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js" defer></script>
+    </footer>   
 	<!-- Initialise AOS après chargement complet -->
     <script>
       window.addEventListener('DOMContentLoaded', () => {
