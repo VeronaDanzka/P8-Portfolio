@@ -24,13 +24,13 @@ const year = new Date().getFullYear()
     </script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js" defer></script>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <slot name="head" />
 	  <meta name="author" content="Davide De Notarpietro">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
   </head>
-  <body class="min-h-screen flex flex-col bg-gradient-custom text-gray-800 font-montserrat dark:text-gray-300">
+  <body class="min-h-screen overflow-x-hidden flex flex-col bg-gradient-custom text-gray-800 font-montserrat dark:text-gray-300">
     <Nav class="z-9999 fixed h-12 bottom-0 left-0 right-0 space-x-4 navMobile-gradient-custom bg-gradient-custom dark:text-gray-700 flex justify-around items-center md:hidden" textColor="text-gray-300 hover:text-gray-100 dark:text-gray-600 dark:hover:text-gray-800" toggleClass="hidden" aria-label="Navigation principale mobile" />
     <div class="flex-grow" data-aos="fade-in">
     <!-- Header avec navigation -->
