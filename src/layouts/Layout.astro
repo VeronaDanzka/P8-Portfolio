@@ -40,7 +40,7 @@ const year = new Date().getFullYear()
         <Nav class="hidden md:flex md:gap-4 md:items-center md:justify-center flex-2" textColor="dark:hover:text-gray-100" toggleClass="md:flex" aria-label="Navigation principale" />
         <div class="flex flex-1 flex-col-reverse items-center gap-2 md:w-35">
           <LoginButton client:only="react" />
-          <Toggledark arial-label="gestion du thème" role="modification clair/sombre"/>
+          <Toggledark aria-label="Activer ou désactiver le mode sombre" role="switch"/>
         </div>
       </div>
       <slot name="header" />
@@ -52,7 +52,7 @@ const year = new Date().getFullYear()
     <!-- Footer -->
     <footer class="pb-13 flex flex-col gap-4 bg-gray-200 dark:bg-gray-700 text-center p-4 text-sm">
       <p>Site réalisé à la main et ne collectant aucunes données personnelles</p>
-      <p>Développé avec <a href="https://astro.build/" target="_blank" rel="noopener noreferrer" class="text-blue-600 dark:text-blue-400 hover:underline">Astro</a> et déployé sur <a href="https://vercel.com/" target="_blank" rel="noopener noreferrer" class="text-blue-600 dark:text-blue-400 hover:underline">Vercel</a></p>
+      <p>Développé avec <a href="https://astro.build/" aria-label="Visiter le site officiel Astro" target="_blank" rel="noopener noreferrer" class="text-black font-bold dark:text-white hover:underline">Astro</a> et déployé sur <a href="https://vercel.com/" aria-label="Visiter le site officiel Vercel" target="_blank" rel="noopener noreferrer" class="text-black font-bold dark:text-white hover:underline">Vercel</a></p>
       <p slot="footer">© {year} Davide De Notarpietro - Tous droits réservés</p>
       <slot name="footer" />
     </footer>   
