@@ -26,12 +26,22 @@ const year = new Date().getFullYear()
 	  <meta name="author" content="Davide De Notarpietro">
     <slot name="head" />
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <!-- Préconnect pour éviter la latence DNS -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <!-- Preload pour dire au navigateur "charge ça en priorité" -->
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap">
+
+    <!-- Chargement optimisé non bloquant -->
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <!-- Fallback is js désactivé -->
+    <noscript>
+      <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    </noscript>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
         integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
         crossorigin="anonymous" referrerpolicy="no-referrer">
-	  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
   </head>
   <body class="min-h-screen flex flex-col bg-gradient-custom text-gray-800 font-montserrat dark:text-gray-300">
     <Nav class="z-9999 fixed h-12 bottom-0 left-0 right-0 space-x-4 navMobile-gradient-custom bg-gradient-custom dark:text-gray-700 flex justify-around items-center md:hidden" textColor="text-gray-300 hover:text-gray-100 dark:text-gray-600 dark:hover:text-gray-800" toggleClass="hidden" aria-label="Navigation principale mobile" />
@@ -39,7 +49,7 @@ const year = new Date().getFullYear()
     <!-- Header avec navigation -->
     <header class="backdrop-blur-xl shadow-md dark:shadow-black md:h-32">
       <div class="container p-6 mx-auto flex flex-col justify-between items-center md:flex-row md:h-32">
-        <h1 class="text-base font-bold flex-1">Davide De Notarpietro<span class="text-sm font-normal italic block mb-2">développeur web full-stack & eCommerçant</span></h1>
+        <h1 class="text-base font-bold flex-1" data-astro-lcp>Davide De Notarpietro<span class="text-sm font-normal italic block mb-2">développeur web full-stack & eCommerçant</span></h1>
         <Nav class="hidden md:flex md:gap-4 md:items-center md:justify-center flex-2" textColor="dark:hover:text-gray-100" toggleClass="md:flex" aria-label="Navigation principale" />
         <div class="flex flex-1 flex-col-reverse items-center gap-2 md:w-35">
           <LoginButton client:load />
