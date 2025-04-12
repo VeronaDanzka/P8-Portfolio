@@ -42,43 +42,45 @@ const formatted = {
             <div class="prose prose-gray dark:prose-invert max-w-none text-left" set:html={formatted.description}></div>
           </section>
       
-          <!-- Technologies -->
+          <!-- Technologies & image -->
           <section>
-            <h3 class="text-2xl font-bold mb-4 text-gray-700 dark:text-gray-200 text-center">
-              Technologies & Compétences
-            </h3>
-            <div class="flex flex-wrap justify-center gap-3">
-              {formatted.tagList.map((tag) => (
-                <span class="bg-blue-600 text-white text-xs px-3 py-1 rounded-full shadow">
-                  {tag}
-                </span>
-              ))}
+            <div class="flex flex-col items-center md:flex-row gap-4 mb-4">
+              {formatted.imageUrl && (
+                <img src={formatted.imageUrl} alt={formatted.title} class="rounded-lg shadow-lg max-w-[300px] h-auto" loading="lazy" />
+              )}
+              <div>
+                <h3 class="text-2xl font-bold mt-6 mb-4 text-gray-700 dark:text-gray-200 text-center">
+                  Technologies & Compétences
+                </h3>
+                <div class="flex flex-wrap justify-center gap-3">
+                  {formatted.tagList.map((tag) => (
+                    <span class="bg-blue-600 text-white text-xs px-3 py-1 rounded-full shadow">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+                <!-- Liens -->
+                <h3 class="text-2xl font-bold mt-6 mb-4 text-gray-700 dark:text-gray-200 text-center">
+                  Liens
+                </h3>
+                <ul class="flex flex-col items-center gap-2">
+                  {formatted.website && (
+                    <li>
+                      <a href={formatted.website} target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline text-sm">
+                        Site Web ↗
+                      </a>
+                    </li>
+                  )}
+                  {formatted.github && (
+                    <li>
+                      <a href={formatted.github} target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline text-sm">
+                        Code GitHub ↗
+                      </a>
+                    </li>
+                  )}
+                </ul>
             </div>
-          </section>
-      
-          <!-- Liens -->
-          <section>
-            <h3 class="text-2xl font-bold mb-4 text-gray-700 dark:text-gray-200 text-center">
-              Liens
-            </h3>
-            <ul class="flex flex-col items-center gap-2">
-              {formatted.website && (
-                <li>
-                  <a href={formatted.website} target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline text-sm">
-                    Site Web ↗
-                  </a>
-                </li>
-              )}
-              {formatted.github && (
-                <li>
-                  <a href={formatted.github} target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline text-sm">
-                    Code GitHub ↗
-                  </a>
-                </li>
-              )}
-            </ul>
-          </section>
-      
+          </section>      
         </div>
     </main>
       
