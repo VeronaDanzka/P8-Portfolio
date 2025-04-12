@@ -19,25 +19,28 @@ const ProjectsMosaique = ({ projects, loading, error, onEdit, onDelete }) => {
     }, []);
     const handleBulkSend = async () => {
         try {
-          const res = await fetch('/api/private/projects/checked', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ selectedIds }),
-          });
-      
-          const data = await res.json();
-          if (res.ok && data.success) {
-            setSuccessSelected(true);
-          } else {
-            console.error('❌ Erreur serveur :', data.error || res.statusText);
-          }
+            setSuccessSelected(false);
+            const res = await fetch('/api/private/projects/checked', {
+                method: 'POST',
+                headers: {
+                'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ selectedIds }),
+            });
+        
+            const data = await res.json();
+            if (res.ok && data.success) {
+                setSuccessSelected(true);
+            } else {
+                console.error('❌ Erreur serveur :', data.error || res.statusText);
+            }
         } catch (err) {
           console.error('❌ Erreur côté client :', err);
         }
     };
+    // filtre des projets sélectionnés pour le slide en page d'accueil
     const handleCheckboxChange = (id) => {
+        setSuccessSelected(false);
         setSelectedIds((prev) =>
           prev.includes(id) ? prev.filter((i) => i !== id) : [...prev, id]
         );

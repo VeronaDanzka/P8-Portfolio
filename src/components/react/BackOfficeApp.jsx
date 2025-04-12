@@ -26,6 +26,7 @@ const BackofficeApp = () => {
 
       {/* Main Content */}
       <main className="flex-1 p-6">
+        {/* change la vue du backoffice en fonction du clic */}
         {view === 'createProject' && <CreateProject setView={setProjectView} client:visible />}
         {view === 'projects' && <Projects setProjectView={setProjectView} projectView={projectView} client:visible />}
       </main>

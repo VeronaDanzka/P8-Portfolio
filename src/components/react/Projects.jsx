@@ -51,6 +51,7 @@ const Projects = ({setProjectView, projectView}) => {
   return (
     <div className="max-w-6xl mx-auto py-10 px-4">
       <h2 className="text-2xl font-semibold mb-6 text-center">Aperçu des projets</h2>
+      {/* changement de vue au bouton modifier */}
       {projectView === 'mosaique' && <ProjectsMosaique projects={projects} loading={loading} error={error} onEdit={handleEdit} onDelete={handleDelete} client:visible />}
       {projectView === 'edit' && <ProjectForm modify={true} setView={setProjectView} projects={projects.find(p => p.id === selectedProjectId)} client:visible />}
     </div>
