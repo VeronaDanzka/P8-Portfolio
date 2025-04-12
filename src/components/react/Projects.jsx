@@ -2,13 +2,11 @@ import ProjectsMosaique from './ProjectsMosaique.jsx';
 import ProjectForm from './ProjectForm.jsx';
 import { useState, useEffect } from 'react';
 
-const Projects = () => {
+const Projects = ({setProjectView, projectView}) => {
   const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
-  const [view, setView] = useState('mosaique');
   const [selectedProjectId, setSelectedProjectId] = useState(null);
-
   useEffect(() => {
     const fetchProjects = async () => {
       try {
@@ -25,7 +23,7 @@ const Projects = () => {
     };
 
     fetchProjects();
-  }, [view]);
+  }, [projectView]);
 
   const handleDelete = async (id) => {
     const confirmDelete = confirm("Supprimer ce projet ?");
@@ -46,15 +44,15 @@ const Projects = () => {
   };
 
   const handleEdit = (id) => {
-    setView('edit');
+    setProjectView('edit');
     setSelectedProjectId(id);
   };
 
   return (
     <div className="max-w-6xl mx-auto py-10 px-4">
       <h2 className="text-2xl font-semibold mb-6 text-center">Aperçu des projets</h2>
-      {view === 'mosaique' && <ProjectsMosaique projects={projects} loading={loading} error={error} onEdit={handleEdit} onDelete={handleDelete} client:visible />}
-      {view === 'edit' && <ProjectForm modify={true} setView={setView} projects={projects.find(p => p.id === selectedProjectId)} client:visible />}
+      {projectView === 'mosaique' && <ProjectsMosaique projects={projects} loading={loading} error={error} onEdit={handleEdit} onDelete={handleDelete} client:visible />}
+      {projectView === 'edit' && <ProjectForm modify={true} setView={setProjectView} projects={projects.find(p => p.id === selectedProjectId)} client:visible />}
     </div>
   );
 };

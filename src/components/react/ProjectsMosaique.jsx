@@ -6,11 +6,9 @@ const ProjectsMosaique = ({ projects, loading, error, onEdit, onDelete }) => {
     useEffect( () => {
         async function fetchSelectedIds() {
             try {
-                const response = await fetch('/api/public/projects/checked'); // ou le bon chemin
+                const response = await fetch('/api/public/projects/checked');
                 const data = await response.json();
                 const ids = data.map((item) => item.id);
-                console.log(data)
-                // On suppose que tu reçois un tableau d'IDs
                 setSelectedIds(ids); 
                 } catch (err) {
                 console.error("Erreur lors de la récupération des projets sélectionnés :", err);

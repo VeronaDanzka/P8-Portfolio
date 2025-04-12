@@ -11,7 +11,7 @@ const ProjectForm = ({ modify = false, projects, setView }) => {
   const [github, setGithub] = useState(modify ? projects.github : '');
   const [website, setWebsite] = useState(modify ? projects.website : '');
   const fileInputRef = useRef(null);
-
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);

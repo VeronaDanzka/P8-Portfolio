@@ -8,7 +8,7 @@ import { useState } from 'react';
 
 const BackofficeApp = () => {
   const [view, setView] = useState('createProject');
-
+  const [projectView, setProjectView] = useState('mosaique');
   return (
     <div className="min-h-screen flex flex-col md:flex-row bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-white">
       {/* Sidebar */}
@@ -18,7 +18,7 @@ const BackofficeApp = () => {
           <button onClick={() => setView('createProject')} className={`cursor-pointer block w-full text-left px-3 py-2 rounded hover:bg-gray-200 dark:hover:bg-gray-700 ${view === 'createProject' ? 'bg-gray-200 dark:bg-gray-700' : ''}`}>
             Créer un projet
           </button>
-          <button onClick={() => setView('projects')} className={`cursor-pointer block w-full text-left px-3 py-2 rounded hover:bg-gray-200 dark:hover:bg-gray-700 ${view === 'projects' ? 'bg-gray-200 dark:bg-gray-700' : ''}`}>
+          <button onClick={() => { setView('projects'); setProjectView('mosaique'); }} className={`cursor-pointer block w-full text-left px-3 py-2 rounded hover:bg-gray-200 dark:hover:bg-gray-700 ${view === 'projects' ? 'bg-gray-200 dark:bg-gray-700' : ''}`}>
             Projets
           </button>
         </nav>
@@ -26,8 +26,8 @@ const BackofficeApp = () => {
 
       {/* Main Content */}
       <main className="flex-1 p-6">
-        {view === 'createProject' && <CreateProject client:visible />}
-        {view === 'projects' && <Projects client:visible />}
+        {view === 'createProject' && <CreateProject setView={setProjectView} client:visible />}
+        {view === 'projects' && <Projects setProjectView={setProjectView} projectView={projectView} client:visible />}
       </main>
     </div>
   );

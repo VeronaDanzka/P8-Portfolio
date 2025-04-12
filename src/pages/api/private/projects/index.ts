@@ -102,7 +102,7 @@ export const POST: APIRoute = async ({ request }) => {
       created_at: new Date(),
       ...(github && { github }),
       ...(website && { website }),
-      // Tu peux ajouter des colonnes comme : imageUrl: uploadResult.secure_url
+
     });
     public_id = uploadResult.public_id; // Récupération du public_id pour la suppression éventuelle
     await db.insert(Image).values({
