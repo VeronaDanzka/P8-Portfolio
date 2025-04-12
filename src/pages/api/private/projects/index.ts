@@ -54,7 +54,10 @@ export const POST: APIRoute = async ({ request }) => {
     // Récupération et nettoyage des champs
     const title = formData.get('title')?.toString().trim() || '';
     const subtitle = formData.get('subtitle')?.toString().trim() || '';
-    const description = sanitizeHtml(formData.get('description')?.toString() || '');
+    const description = sanitizeHtml(formData.get('description')?.toString() || '',
+          { allowedAttributes: {
+            '*': ['class'], // Autorise class sur tous les éléments
+          }});
     const tags = formData.get('tags')?.toString().trim() || '';
     const github = formData.get('github')?.toString().trim() || '';
     const website = formData.get('website')?.toString().trim() || '';
