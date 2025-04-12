@@ -1,6 +1,10 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
     content: ["./src/**/*.{astro,html,js,jsx,ts,tsx}"],
+    safelist: [
+      'list-disc',
+      'pl-5'
+    ],
     darkMode: "class", // Active le mode sombre basé sur une classe
     theme: {
       extend: {
