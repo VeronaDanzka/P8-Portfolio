@@ -27,7 +27,7 @@ const SlideProjects = () => {
         <div className="flex w-full animate-slide gap-6">
           {projects.map((p) => (
             <a key={p.id} href={`/projects/${p.id}`} className="group block cursor-pointer flex-shrink-0 w-80">
-              <article className="bg-gray-200 dark:bg-gray-900 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 items-center text-center hover:scale-[1.015] transition-transform duration-500 ease-in-out overflow-hidden">
+              <article className="bg-gray-200 h-full dark:bg-gray-900 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 items-center text-center hover:scale-[1.015] transition-transform duration-500 ease-in-out overflow-hidden">
   
                 
                 <div className="relative overflow-hidden">
@@ -43,7 +43,7 @@ const SlideProjects = () => {
                 </div>
   
                 
-                <div className="p-4 border-box flex justify-between bg-white dark:bg-gray-700 relative z-50">
+                <div className="p-4 border-box flex flex-col justify-between grow bg-white dark:bg-gray-700 relative z-50">
                   <div className="text-start">
                     <h3 className="text-xl font-semibold text-gray-800 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-600 transition-colors">
                       {p.title}
