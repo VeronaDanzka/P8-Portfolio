@@ -33,13 +33,20 @@
 /* Animation par défaut (desktop) */
 .animate-slide {
 animation: slide-desktop 20s linear infinite;
+animation-play-state: running;
 }
-
+.animate-slide:hover {
+    animation-play-state: paused;
+}
 /* Override en mobile */
 @media (max-width: 768px) {
-.animate-slide {
-    animation: slide-mobile 20s linear infinite;
-}
+    .animate-slide {
+        animation: slide-mobile 20s linear infinite;
+        animation-play-state: running;
+    }
+    .animate-slide:hover {
+        animation-play-state: paused;
+    }
 }
 .grid-background {
     position: absolute;

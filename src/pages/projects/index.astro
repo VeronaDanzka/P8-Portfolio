@@ -5,24 +5,35 @@ import { db, Project, Image, sql } from 'astro:db';
 
 export const prerender = false;
 
-    // On récupère tous les projets
-    const projects = await db.select().from(Project);
+// On récupère tous les projets
+const projects = await db.select().from(Project);
 
-    // Pour chaque projet, on récupère l'image associée (une seule) → juste l'URL
-    const projectsWithImageUrl = await Promise.all(
-      projects.map(async (project) => {
-        const [image] = await db
-          .select()
-          .from(Image)
-          .where(sql`projectId = ${project.id}`);
-        const tags = project.tags?.split(',').map((tag) => tag.trim()) || [];
-        return {
-          ...project,
-          imageUrl: image?.url ?? null,
-          tagList: tags,
-        };
-      })
-    );
+// Pour chaque projet, on récupère l'image associée (une seule) → juste l'URL
+const projectsWithImageUrl = await Promise.all(
+    projects.map(async (project) => {
+    const [image] = await db
+        .select()
+        .from(Image)
+        .where(sql`projectId = ${project.id}`);
+    const tags = project.tags?.split(',').map((tag) => tag.trim()) || [];
+    return {
+        ...project,
+        imageUrl: image?.url ?? null,
+        tagList: tags,
+    };
+    })
+);
+const projectsPerPage = 20
+
+// On récupère le paramètre de l'URL ?page=2 (ou 1 par défaut)
+const currentPage = Number(Astro.url.searchParams.get('page')) || 1
+
+const startIndex = (currentPage - 1) * projectsPerPage
+const endIndex = startIndex + projectsPerPage
+const orderedProjects = projectsWithImageUrl.toReversed()
+const paginatedProjects = orderedProjects.slice(startIndex, endIndex)
+
+const totalPages = Math.ceil(projectsWithImageUrl.length / projectsPerPage)
     
 
 ---
@@ -33,9 +44,9 @@ export const prerender = false;
     <main slot="main" class="flex-grow p-6 container mx-auto">
         <h1 class="text-3xl font-bold mb-4">Mes projets</h1>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 auto-rows-fr">
-            {projectsWithImageUrl.map((p) => (
+            {paginatedProjects.map((p) => (
                 <a href={`/projects/${p.id}`} class="group block cursor-pointer">
-                    <article class="bg-gray-200 h-full overflow-hidden dark:bg-gray-900 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 items-center text-center hover:scale-[1.015] transition-transform duration-500 ease-in-out">
+                    <article class="bg-gray-200 h-full overflow-hidden dark:bg-gray-900 rounded-xl shadow-sm items-center text-center hover:scale-[1.015] transition-transform duration-500 ease-in-out">
 
                         <div class="relative overflow-hidden">                       
                             {p.imageUrl && (
@@ -75,5 +86,20 @@ export const prerender = false;
 
             ))}
         </div>
+        {/* Pagination*/}
+        <div class="flex justify-center mt-8 gap-2">
+            {Array.from({ length: totalPages }, (_, i) => (
+              <a
+                href={`?page=${i + 1}`}
+                class={`px-3 py-1 rounded ${
+                  Number(currentPage) === i + 1
+                    ? 'bg-blue-600 text-white'
+                    : 'bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-white'
+                }`}
+              >
+                {i + 1}
+              </a>
+            ))}
+          </div>
     </main>
 </BaseLayout>

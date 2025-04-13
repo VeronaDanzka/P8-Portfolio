@@ -28,7 +28,7 @@ const formatted = {
     <title slot="head">Portfolio de Davide De Notarpietro - Projet {formatted.title}</title>
     <meta slot="head" name="description" content={`Je vous présente mon Projet ${formatted.title}, ${formatted.subtitle}. N'hésitez pas à me contacter pour discuter de votre projet`} />
     <main slot="main" class="flex-grow px-4 py-10 container mx-auto">
-        <div class="max-w-3xl mx-auto bg-white dark:bg-gray-900 rounded-xl shadow-lg p-8 space-y-10">
+        <div class="max-w-[900px] mx-auto bg-white dark:bg-gray-900 rounded-xl shadow-lg p-8 space-y-10">
       
           <h2 class="text-4xl text-center font-extrabold text-gray-800 dark:text-white">
             {formatted.title}
@@ -44,7 +44,7 @@ const formatted = {
       
           <!-- Technologies & image -->
           <section>
-            <div class="flex flex-col items-center md:flex-row gap-4 mb-4">
+            <div class="flex flex-col justify-around items-center md:flex-row gap-4 mb-4">
               {formatted.imageUrl && (
                 <img src={formatted.imageUrl} alt={formatted.title} class="rounded-lg shadow-lg max-w-[300px] h-auto" loading="lazy" />
               )}
