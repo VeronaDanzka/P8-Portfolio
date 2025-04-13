@@ -33,3 +33,4 @@ To add at the root of the project
 | :------------------------ | :----------------------------------------------- |
 | USER=                     | "YOUR_USERNAME"                                  |
 | PASSWORD=                 | "YOUR_PASSWORD"                                  |
+| JWT_SECRET=               | "YOUR_SECRET_JWT_KEY"                            |
