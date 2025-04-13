@@ -13,7 +13,8 @@ const SlideProjects = () => {
                 const formatted = projects.map((p) => ({
                     ...p,
                     tagList: p.tags?.split(',').map(t => t.trim()) || []
-                }));
+                }))
+                .sort((a, b) => new Date(b.created_at) - new Date(a.created_at)); // tri du plus récent au plus ancien
                 setProjects(formatted);
             } catch (err) {
                 setError(err.message || 'Une erreur est survenue');
