@@ -23,12 +23,12 @@ To add at the root of the project
 | CLOUDINARY_API_KEY=       | "YOUR_API_KEY"                                   |
 | CLOUDINARY_API_SECRET=    | "YOUR_API_SECRET"                                |
 | CLOUDINARY_URL=           | "cloudinary://YOUR:URL-EXAMPLE"                  |
-|                                                                              |
+                                                                              
 | REMOTE DB (like Turso)    | Value example                                    |
 | :------------------------ | :----------------------------------------------- |
 | ASTRO_DB_REMOTE_URL=      | "libsql://your-url-example"                      |
 | ASTRO_DB_APP_TOKEN=       | "YOUR_TURSO_SECRET_TOKEN"                        |
-|                                                                              |
+                                                                             
 | AUTH BACKOFFICE           | Value example                                    |
 | :------------------------ | :----------------------------------------------- |
 | USER=                     | "YOUR_USERNAME"                                  |
