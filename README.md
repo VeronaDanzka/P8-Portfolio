@@ -1,34 +1,4 @@
-# Astro Starter Kit: Basics
-
-```sh
-npm create astro@latest -- --template basics
-```
-
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/basics)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/basics)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/basics/devcontainer.json)
-
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
-
-![just-the-basics](https://github.com/withastro/astro/assets/2244813/a0a5533c-a856-4198-8470-2d67b1d7c554)
-
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src/
-│   ├── layouts/
-│   │   └── Layout.astro
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
-
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+# Personal Portfolio with BackOffice made with AstroJS
 
 ## 🧞 Commands
 
@@ -43,6 +13,23 @@ All commands are run from the root of the project, from a terminal:
 | `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
 | `npm run astro -- --help` | Get help using the Astro CLI                     |
 
-## 👀 Want to learn more?
+## .env FILE
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+To add at the root of the project
+
+| CLOUDINARY                | Value example                                    |
+| :------------------------ | :----------------------------------------------- |
+| CLOUDINARY_CLOUD_NAME=    | "eXaMpLe"                                        |
+| CLOUDINARY_API_KEY=       | "YOUR_API_KEY"                                   |
+| CLOUDINARY_API_SECRET=    | "YOUR_API_SECRET"                                |
+| CLOUDINARY_URL=           | "cloudinary://YOUR:URL-EXAMPLE"                  |
+|                                                                              |
+| REMOTE DB (like Turso)    | Value example                                    |
+| :------------------------ | :----------------------------------------------- |
+| ASTRO_DB_REMOTE_URL=      | "libsql://your-url-example"                      |
+| ASTRO_DB_APP_TOKEN=       | "YOUR_TURSO_SECRET_TOKEN"                        |
+|                                                                              |
+| AUTH BACKOFFICE           | Value example                                    |
+| :------------------------ | :----------------------------------------------- |
+| USER=                     | "YOUR_USERNAME"                                  |
+| PASSWORD=                 | "YOUR_PASSWORD"                                  |
