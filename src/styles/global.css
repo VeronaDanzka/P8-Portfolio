@@ -29,25 +29,28 @@
     transform: translateX(calc(-100% - 200vw));
 }
 }
-
-/* Animation par défaut (desktop) */
+/* Animation par défaut (mobile) */
 .animate-slide {
-animation: slide-desktop 20s linear infinite;
-animation-play-state: running;
+    animation: slide-mobile 20s linear infinite;
+    animation-play-state: running;
 }
 .animate-slide:hover {
     animation-play-state: paused;
 }
-/* Override en mobile */
-@media (max-width: 768px) {
+
+/* Override en desktop */
+@media (min-width: 768px) {
     .animate-slide {
-        animation: slide-mobile 20s linear infinite;
-        animation-play-state: running;
+    animation: slide-desktop 20s linear infinite;
+    animation-play-state: running;
     }
     .animate-slide:hover {
         animation-play-state: paused;
     }
 }
+
+
+
 .grid-background {
     position: absolute;
     inset: 0;
@@ -90,10 +93,18 @@ font-style: normal;
 font-weight: 700;
 src: url('/fonts/montserrat-v29-latin-700.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
-
 .mask-fade {
-    -webkit-mask-image: linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%);
-    mask-image: linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%);
+    /* Style par défaut : version mobile = gradient serré */
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, black 2%, black 7%, transparent 100%);
+    mask-image: linear-gradient(to right, transparent 0%, black 2%, black 7%, transparent 100%);
+}
+  
+  /* Version desktop : gradient plus large */
+@media screen and (min-width: 768px) {
+    .mask-fade {
+      -webkit-mask-image: linear-gradient(to right, transparent 0%, black 30%, black 85%, transparent 100%);
+      mask-image: linear-gradient(to right, transparent 0%, black 30%, black 85%, transparent 100%);
+    }
 }
 nav.bg-gradient-custom {
     background: -webkit-linear-gradient(90deg, #000000,#0d1521,#070e18);
