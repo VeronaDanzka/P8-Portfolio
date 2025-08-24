@@ -11,6 +11,8 @@ const year = new Date().getFullYear()
     <link rel="preload" href="/fonts/montserrat-v29-latin-regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
     <link rel="preload" href="/fonts/montserrat-v29-latin-italic.woff2" as="font" type="font/woff2" crossorigin="anonymous">
     <link rel="preload" href="/fonts/montserrat-v29-latin-700.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+    <link rel="icon" type="image/webp" sizes="32x32" href="/img/logo-dnd.webp">
+    <link rel="apple-touch-icon" type="image/webp" sizes="180x180" href="/img/logo-dnd.webp">
     <script>
       (function () {
         const storedTheme = localStorage.getItem('theme portfolio davide');
@@ -158,8 +160,14 @@ const year = new Date().getFullYear()
     <div class="flex-grow" data-aos="fade-in">
     <!-- Header avec navigation -->
     <header class="backdrop-blur-xl shadow-md dark:shadow-black md:h-32">
+      
       <div class="container p-6 mx-auto flex flex-col justify-between items-center md:flex-row md:h-32">
-        <h1 class="text-base font-bold flex-1" data-astro-lcp>Davide De Notarpietro<span class="text-sm font-normal italic block mb-2">développeur web full-stack & eCommerçant</span></h1>
+          <a class="flex flex-row lg:items-center" href="/">
+            <img src="/img/logo-dnd.webp" alt="Logo de Davide De Notarpietro" class="w-15 h-15" />
+            <h1 class="text-sm font-bold block pt-1 items-center lg:text-base" data-astro-lcp>Davide De Notarpietro
+              <span class="text-xs font-normal italic block mb-2 lg:text-sm">développeur web full-stack & eCommerçant</span>
+            </h1>
+          </a>
         <Nav class="hidden md:flex md:gap-4 md:items-center md:justify-center flex-2" textColor="dark:hover:text-gray-100" toggleClass="md:flex" aria-label="Navigation principale" />
         <div class="flex flex-1 flex-col-reverse items-center gap-2 md:w-35">
           <LoginButton client:only="react" />
@@ -173,7 +181,7 @@ const year = new Date().getFullYear()
     </div>
     <!-- Footer -->
     <footer class="pb-13 flex flex-col gap-4 bg-gray-200 dark:bg-gray-700 text-center p-4 text-sm">
-      <p>Site réalisé à la main et ne collectant aucunes données personnelles</p>
+      <p>Site réalisé à la main et ne collectant aucune donnée personnelle</p>
       <p>Développé avec <a href="https://astro.build/" aria-label="Visiter le site officiel Astro" target="_blank" rel="noopener noreferrer" class="text-black font-bold dark:text-white hover:underline">Astro</a> et déployé sur <a href="https://vercel.com/" aria-label="Visiter le site officiel Vercel" target="_blank" rel="noopener noreferrer" class="text-black font-bold dark:text-white hover:underline">Vercel</a></p>
       <p slot="footer">© {year} Davide De Notarpietro - Tous droits réservés</p>
       <slot name="footer" />
