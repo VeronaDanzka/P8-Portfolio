@@ -4,6 +4,86 @@
     --font-sans: 'Inter', 'sans-serif';
     --font-montserrat: 'Montserrat', 'ui-sans-serif', 'system-ui';
 }
+/* Géométrie + anim : base, valable pour les deux thèmes */
+/* ========= Base (structure + animations) ========= */
+.gradient-background {
+  position: fixed; inset: 0;     /* top/right/bottom/left: 0 */
+  z-index: 0;                    /* pas -1 */
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.gradient-sphere { position: absolute; border-radius: 50%; filter: blur(60px); }
+
+.sphere-1 { width: 40vw; height: 40vw; top: -10%; left: -10%; animation: float-1 15s ease-in-out infinite alternate; }
+.sphere-2 { width: 45vw; height: 45vw; bottom: -20%; right: -10%; animation: float-2 18s ease-in-out infinite alternate; }
+.sphere-3 { width: 30vw; height: 30vw; top: 60%; left: 20%;  animation: float-3 20s ease-in-out infinite alternate; }
+
+.noise-overlay {
+  position: absolute; inset: 0; opacity: 0.04; z-index: 2;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.grid-overlay {
+  position: absolute; inset: 0; z-index: 1; background-size: 40px 40px;
+}
+
+.glow {
+  position: absolute; width: 40vw; height: 40vh; top: 50%; left: 50%;
+  transform: translate(-50%, -50%); z-index: 1; filter: blur(30px);
+  animation: pulse 8s infinite alternate;
+}
+
+.particles-container { position: absolute; inset: 0; z-index: 3; pointer-events: none; }
+.particle { position: absolute; border-radius: 50%; opacity: 0; pointer-events: none; }
+
+/* Animations */
+@keyframes float-1 { 0%{transform:translate(0,0) scale(1);} 100%{transform:translate(10%,10%) scale(1.1);} }
+@keyframes float-2 { 0%{transform:translate(0,0) scale(1);} 100%{transform:translate(-10%,-5%) scale(1.15);} }
+@keyframes float-3 { 0%{transform:translate(0,0) scale(1); opacity:.3;} 100%{transform:translate(-5%,10%) scale(1.05); opacity:.6;} }
+@keyframes pulse   { 0%{opacity:.3; transform:translate(-50%,-50%) scale(.9);} 100%{opacity:.7; transform:translate(-50%,-50%) scale(1.1);} }
+
+/* ========= Light theme (par défaut) ========= */
+/* Sphères : teintes dev “fraîches” et lisibles sur clair */
+.sphere-1 { background: linear-gradient(40deg, rgba(18,176,255,0.50), rgba(99,102,241,0.35)); } /* cyan → indigo */
+.sphere-2 { background: linear-gradient(240deg, rgba(16,185,129,0.45), rgba(59,130,246,0.30)); } /* émeraude → bleu */
+.sphere-3 { background: linear-gradient(120deg, rgba(236,72,153,0.40), rgba(14,165,233,0.30)); } /* rose → cyan */
+
+/* Quadrillage discret (traits sombres très légers) */
+.grid-overlay {
+  background-image:
+    linear-gradient(to right, rgba(15,23,42,0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(15,23,42,0.06) 1px, transparent 1px);
+}
+
+/* Halo central bleuté */
+.glow { background: radial-gradient(circle, rgba(14,165,233,0.18), transparent 70%); }
+
+/* Particules (si tu les utilises) : cyan lumineux sur clair */
+.particle { background: #0ea5e9; box-shadow: 0 0 12px rgba(14,165,233,0.45); }
+
+/* ========= Dark theme (parent .dark) ========= */
+/* Sphères : néons plus intenses */
+.dark .sphere-1 { background: linear-gradient(40deg, rgba(99,102,241,0.65), rgba(56,189,248,0.35)); }  /* indigo → cyan */
+.dark .sphere-2 { background: linear-gradient(240deg, rgba(236,72,153,0.65), rgba(245,158,11,0.35)); } /* magenta → amber */
+.dark .sphere-3 { background: linear-gradient(120deg, rgba(56,189,248,0.50), rgba(124,58,237,0.45)); } /* cyan → violet */
+
+/* Quadrillage clair et très discret */
+.dark .grid-overlay {
+  background-image:
+    linear-gradient(to right, rgba(255,255,255,0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255,255,255,0.05) 1px, transparent 1px);
+}
+
+/* Halo central violet/cyan */
+.dark .glow { background: radial-gradient(circle, rgba(124,58,237,0.22), transparent 70%); }
+
+/* Particules : blanc bleuté plus visible */
+.dark .particle { background: #e6f6ff; box-shadow: 0 0 14px rgba(56,189,248,0.55); }
+
+button:focus{
+  outline: none;
+}
 @keyframes fadeIn {
     from { opacity: 0; }
     to { opacity: 1; }
@@ -95,15 +175,14 @@ src: url('/fonts/montserrat-v29-latin-700.woff2') format('woff2'); /* Chrome 36+
 }
 .mask-fade {
     /* Style par défaut : version mobile = gradient serré */
-    -webkit-mask-image: linear-gradient(to right, transparent 0%, black 2%, black 7%, transparent 100%);
-    mask-image: linear-gradient(to right, transparent 0%, black 2%, black 7%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to right, #000000e6 0%, black 30%, black 85%, #000000f5 100% 100%);
+    mask-image: linear-gradient(to right, #000000e6 0%, black 30%, black 85%, #000000f5 100% 100%);
 }
-  
   /* Version desktop : gradient plus large */
 @media screen and (min-width: 768px) {
     .mask-fade {
-      -webkit-mask-image: linear-gradient(to right, transparent 0%, black 30%, black 85%, transparent 100%);
-      mask-image: linear-gradient(to right, transparent 0%, black 30%, black 85%, transparent 100%);
+      -webkit-mask-image: linear-gradient(to right, #000000e6 0%, black 30%, black 85%, #000000f5 100% 100%);
+      mask-image: linear-gradient(to right, #000000e6 0%, black 30%, black 85%, #000000f5 100% 100%);
     }
 }
 nav.bg-gradient-custom {
